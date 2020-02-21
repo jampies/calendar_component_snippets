@@ -1,0 +1,69 @@
+@import '../../../style/variables.scss';
+
+.CalendarDay {
+  position: relative;
+  height: 100%;
+
+  .CalendarHourHeadings {
+    position: absolute;
+    top: 0.5em;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 0.5em;
+    pointer-events: none;
+    font-size: 0.9em;
+    @media screen and (max-width: $screen-sm-max) {
+      font-size: 0.8em;
+    }
+
+    .CalendarHourHeading {
+      flex: 1;
+      margin-left: -0.5em;
+    }
+  }
+
+  .DayLabel {
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    text-align: center;
+    pointer-events: none;
+
+    @media screen and (max-width: $screen-md-max) {
+      font-size: 0.9em;
+    }
+    @media screen and (max-width: $screen-sm-max) {
+      font-size: 0.8em;
+    }
+
+    .DayOfWeek, .Month {
+      font-size: 0.9em;
+    }
+
+    .DayOfMonth, .DayOfWeek.StandAlone {
+      font-weight: bold;
+      line-height: 1em;
+      color: #666;
+    }
+
+    .DayOfMonth {
+      font-size: 2em;
+    }
+
+    .DayOfWeek.StandAlone {
+      font-size: 1.5em;
+    }
+  }
+
+  .CalendarDayBody {
+    height: 100%;
+    position: relative;
+
+    &:global(.alt) {
+      background-color: #fafafa;
+    }
+  }
+}

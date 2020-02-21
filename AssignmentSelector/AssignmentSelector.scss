@@ -1,0 +1,88 @@
+@import '../../../style/variables.scss';
+
+.assignmentSelector {
+  display: inline-block;
+
+  .visibleContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    color: $colour-lighter-grey;
+
+    .selectedValue {
+      padding: 0.1em 0.5em;
+      &.isSmall {
+        width: 0;
+        overflow: hidden;
+        padding: 0;
+      }
+    }
+    &:hover {
+      color: $colour-white;
+      cursor: pointer;
+    }
+  }
+
+  .teamMembersDropdown {
+    position: absolute;
+    background-color: $colour-white;
+    color: $colour-black;
+    border: 1px solid $colour-light-grey;
+    left: -1px;
+    top: 1.6em;
+    box-shadow: 1px 1px 8px -3px #000;
+    &.isSmall {
+      position: absolute;
+      left: -3px;
+      top: 25px;
+    }
+
+    .teamMemberContainer {
+      padding: 0.2em 1em;
+      border-top: none;
+      position: relative;
+
+      &:hover {
+        &:not(.isDisabled){
+          color: $colour-logo-orange;
+          cursor: pointer;
+        }
+      }
+
+      &.isSelected {
+        font-weight: bold;
+      }
+
+      &.italic {
+        font-style: italic;
+        font-weight: normal;
+        color: $colour-light-grey;
+      }
+
+      &.isDisabled {
+        background-color: $colour-lighter-grey;
+        color: $colour-dark-grey;
+        cursor: default;
+      }
+
+      .colourTag {
+        position: absolute;
+        height: 1.7em;
+        width: .4em;
+        left: 0;
+        top: 0;
+      }
+
+      .label {
+        padding: 0 .5em;
+      }
+    }
+  }
+}
+
+
+:global(.calendar-sm), :global(.calendar-xs) {
+  .selectedValue {
+    padding: 0.1em 0;
+  }
+}

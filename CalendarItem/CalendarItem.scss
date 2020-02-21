@@ -1,0 +1,250 @@
+@import '../../../style/variables.scss';
+
+.CalendarItemContainer {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 3px;
+  padding: 0;
+  box-sizing: border-box;
+  pointer-events: all;
+  user-select: none;
+  text-align: left;
+  font-size: 16px;
+  overflow: visible;
+  border: 1px solid #ddd;
+  box-shadow: 1px 1px 8px -2px #000;
+  transition: box-shadow 0.2s ease-in-out, top 0.2s ease-in-out;
+  z-index: 1;
+
+  &:hover {
+    // Hack to determine if tooltips should show or not
+    max-height: 1000px !important;
+  }
+
+  &:focus {
+    outline-style: dashed;
+    outline-width: 2px;
+  }
+
+  &.Editable:hover {
+    box-shadow: 4px 4px 12px -4px #000;
+  }
+
+  .TooltipContainer {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .CalendarItem {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    color: $colour-white;
+    max-width: calc(100% - 22px);
+    margin-left: 10px;
+
+    input[type=checkbox] {
+      margin: 0 0.2em 0 0;
+      font-size: 1em;
+      vertical-align: middle;
+      line-height: 1.8em;
+      opacity: 0;
+    }
+
+    input[type=checkbox]:hover,
+    input[type=checkbox]:active,
+    input[type=checkbox]:checked {
+      opacity: 1;
+
+      _:-ms-lang(x),
+      & {
+        background-color: inherit;
+        border: none;
+      }
+    }
+
+    .Text {
+      font-size: 0.8em;
+      font-weight: bold;
+      line-height: 2em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-right: 1em;
+    }
+
+    .Body {
+      flex: 1;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 0.9em;
+    }
+
+    .Controls {
+      min-height: 26px;
+
+      button {
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0;
+
+        &:hover,
+        &:active,
+        &:focus {
+          color: rgba(255, 255, 255, 1);
+        }
+      }
+
+      :global(.toucan-icon) {
+        margin: 0;
+        font-size: 1em;
+        vertical-align: middle;
+        line-height: 1.8em;
+      }
+    }
+  }
+
+  &.active {
+    z-index: 1000;
+  }
+}
+
+:global(.calendar-xs) {
+  .CalendarItem {
+    input[type=checkbox] {
+      margin-right: 0.1em;
+      padding: 0.3em;
+    }
+  }
+}
+
+:global(.calendar-xs),
+:global(.calendar-sm) {
+  .CalendarItem {
+    .Text {
+      margin-right: 0;
+    }
+
+    .Text,
+    .Body {
+      font-size: 0.8em;
+    }
+
+    .Controls {
+      font-size: 0.8em;
+    }
+  }
+}
+
+.DragHandle {
+  touch-action: none;
+  width: 15px;
+  min-width: 15px;
+  height: 2em;
+  padding: 0.5em 0.3em;
+  box-sizing: border-box;
+
+  .Line {
+    border-radius: 1px;
+    box-sizing: border-box;
+    height: 100%;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &.dragging {
+    cursor: grabbing;
+  }
+
+  &.notDragging {
+    cursor: grab;
+  }
+}
+
+.CalendarItemContainer:not(.Editable) {
+  cursor: default;
+
+  .DragHandle {
+    display: none;
+  }
+
+  .CalendarItem {
+    max-width: none;
+  }
+}
+
+.DragHandle:first-child {
+  transform: translate(-5px);
+  padding-left: 9px;
+  left: 0;
+  position: absolute;
+
+  .Line {
+    border-left: 2px solid rgba(0, 0, 0, 0.3);
+  }
+}
+
+.DragHandle:last-child {
+  transform: translate(5px);
+  padding-right: 11px;
+  right: 0;
+  position: absolute;
+
+  .Line {
+    border-right: 2px solid rgba(0, 0, 0, 0.3);
+  }
+}
+
+.CalendarItemContainer:hover,
+.CalendarItemContainer:focus {
+  .DragHandle .Line {
+    height: 1em;
+  }
+
+  .DragHandle:first-child .Line {
+    border-left: 3px double rgba(255, 255, 255, 0.7);
+  }
+
+  .DragHandle:last-child .Line {
+    border-right: 3px double rgba(255, 255, 255, 0.7);
+  }
+
+  input[type=checkbox] {
+    visibility: visible;
+  }
+
+  &.isSmall {
+    z-index: $z-index-popovers;
+  }
+}
+
+.CalendarItemContainer.SelectMode {
+  input[type=checkbox] {
+    visibility: visible;
+  }
+}
+
+.isSmall {
+  .DragHandle {
+    padding: 0.5em 0em;
+    width: 5px;
+    min-width: 5px;
+  }
+
+  .CalendarItem {
+    margin: 0 2px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    max-width: unset;
+    .Text {
+      margin: 0;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import '../../../style/variables.scss';
+
+.ribbon {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 240px;
+  padding: 0.5em 0;
+  background-color: $colour-mid-blue;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  text-transform: uppercase;
+  text-align: center;
+  right: -10px;
+  top: 20px;
+  transform: rotate(-45deg);
+}
